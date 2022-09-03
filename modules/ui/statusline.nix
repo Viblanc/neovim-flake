@@ -70,10 +70,10 @@ in {
         end
 
         local result = {
-          errors = vim.diagnostic.severity.ERROR.count,
-          warnings = vim.diagnostic.severity.WARN.count,
-          info = vim.diagnostic.severity.INFO.count,
-          hints = vim.diagnostic.severity.HINT.count
+          errors = count[vim.diagnostic.severity.ERROR],
+          warnings = count[vim.diagnostic.severity.WARN],
+          info = count[vim.diagnostic.severity.INFO],
+          hints = count[vim.diagnostic.severity.HINT]
         }
 
         return string.format(" %%#StatusLineDiagnosticWarn#%s %%#StatusLineDiagnosticError#%s ", result.warnings, result.errors)
