@@ -3,11 +3,15 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+
     vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins";
+
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    rnix-lsp.url = "github:nix-community/rnix-lsp";
 
     nvim-lspconfig = { url = "github:neovim/nvim-lspconfig"; flake = false; };
     nvim-cmp = { url = "github:hrsh7th/nvim-cmp"; flake = false; };
@@ -41,7 +45,7 @@
     nvim-web-devicons = { url = "github:kyazdani42/nvim-web-devicons"; flake = false; };
   };
 
-  outputs = { self, nixpkgs, vim-extra-plugins, neovim, ... }@inputs:
+  outputs = { self, nixpkgs, vim-extra-plugins, neovim, rnix-lsp, ... }@inputs:
   let
     system = "x86_64-linux";
 
@@ -82,6 +86,7 @@
 
     neovimOverlay = final: prev: {
       neovim-nightly = neovim.packages.${prev.system}.neovim;
+      rnix-lsp = rnix-lsp.packages.${prev.system}.rnix-lsp;
     };
 
     pluginsOverlay = lib.buildPluginOverlay;
@@ -102,8 +107,18 @@
         inherit pkgs;
         config = {
           vim.viAlias = true;
-          vim.lsp.enable = true;
           vim.treesitter.enable = true;
+          vim.lsp.enable = true;
+          vim.lsp.clang = true;
+          vim.lsp.elixir = true;
+          vim.lsp.go = true;
+          vim.lsp.java = true;
+          vim.lsp.lua = true;
+          vim.lsp.nix = true;
+          vim.lsp.ocaml = true;
+          vim.lsp.python = true;
+          vim.lsp.rust = true;
+          vim.lsp.typescript = true;
         };
       };
 

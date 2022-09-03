@@ -13,31 +13,14 @@ in {
     go = mkEnableOption "Enable Go support";
     java = mkEnableOption "Enable Java support";
     lua = mkEnableOption "Enable Lua support";
+    nix = mkEnableOption "Enable Nix support";
     ocaml = mkEnableOption "Enable OCaml support";
     python = mkEnableOption "Enable Python support";
     rust = mkEnableOption "Enable Rust support";
     typescript = mkEnableOption "Enable TypeScript/JavaScript support";
-    servers = mkOption {
-      description = "List of language servers";
-      default = [];
-      type = with types; listOf (nullOr package);
-    };
-
   };
 
   config = mkIf cfg.enable {
-    vim.lsp.servers = with pkgs; [
-      clang-tools
-      elixir_ls
-      gopls
-      jdt-language-server
-      sumneko-lua-language-server
-      ocamlPackages.ocaml-lsp
-      nodePackages.pyright
-      rust-analyzer
-      nodePackages.typescript-language-server
-    ];
-
     vim.startPlugins = with pkgs.neovimPlugins; [
       nvim-lspconfig
     ];
@@ -59,6 +42,7 @@ in {
         "sumneko_lua",
         "ocamllsp",
         "pyright",
+        "rnix",
         "rust_analyzer",
         "tsserver"
       }
