@@ -115,10 +115,6 @@
         };
       });
 
-    overlay = final: prev: {
-      neovim-svzer = self.packages.${prev.system}.neovim-svzer;
-    };
-
     packages = lib.withDefaultSystems 
       (sys: rec {
         default = neovim-svzer;
