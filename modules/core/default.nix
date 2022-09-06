@@ -16,15 +16,15 @@ let
   '';
 
   keymaps2Lua = keymaps:
-    let fun = map:
+    let fun = keymap:
       let
-        inherit (map) mode;
-        prefix = if (hasAttr "prefix" map) then map.prefix else "";
-        opts = if (hasAttr "options" map) then
-          "{" + concatStringsSep "," (map (o: "${o} = true") map.options) + "}"
+        inherit (keymap) mode;
+        prefix = if (hasAttr "prefix" keymap) then keymap.prefix else "";
+        opts = if (hasAttr "options" keymap) then
+          "{" + concatStringsSep "," (map (o: "${o} = true") keymap.options) + "}"
         else
           "{}";
-        mappings = removeAttrs map [ "prefix" "mode" "options" ];
+        mappings = removeAttrs keymap [ "prefix" "mode" "options" ];
       in
         concatStrings 
         (mapAttrsToList 
