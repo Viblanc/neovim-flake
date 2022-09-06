@@ -12,8 +12,10 @@ in {
 
     vim.keymaps = [
       {
+        prefix = "<Leader>";
         mode = "n";
-        "<Leader><Space>" = "<cmd>Telescope fd<CR>";
+        "<Space>" = "<cmd>Telescope fd<CR>";
+        options = [ "silent" ];
       }
     ];
 
