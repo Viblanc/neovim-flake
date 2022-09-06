@@ -28,19 +28,19 @@ in {
     vim.nmap = [
       {
         prefix = "<Leader>";
-        "e"    = "lua vim.diagnostic.open_float()";
-        "rn"   = "lua vim.lsp.buf.rename()";
-        "ca"   = "lua vim.lsp.buf.code_action()";
-        "f"    = "lua vim.lsp.buf.formatting()";
-        "k"    = "lua vim.lsp.buf.hover()";
+        "e"    = "<Cmd>lua vim.diagnostic.open_float()<CR>";
+        "rn"   = "<Cmd>lua vim.lsp.buf.rename()<CR>";
+        "ca"   = "<Cmd>lua vim.lsp.buf.code_action()<CR>";
+        "f"    = "<Cmd>lua vim.lsp.buf.formatting()<CR>";
+        "k"    = "<Cmd>lua vim.lsp.buf.hover()<CR>";
       }
       {
-        "(d"    = "lua vim.diagnostic.goto_prev()";
-        ")d"    = "lua vim.diagnostic.goto_next()";
-        "gd"    = "lua vim.lsp.buf.definition()";
-        "gD"    = "lua vim.lsp.buf.declaration()";
-        "gi"    = "lua vim.lsp.buf.implementation()";
-        "<C-k>" = "lua vim.lsp.buf.signature_help()";
+        "(d"    = "<Cmd>lua vim.diagnostic.goto_prev()<CR>";
+        ")d"    = "<Cmd>lua vim.diagnostic.goto_next()<CR>";
+        "gd"    = "<Cmd>lua vim.lsp.buf.definition()<CR>";
+        "gD"    = "<Cmd>lua vim.lsp.buf.declaration()<CR>";
+        "gi"    = "<Cmd>lua vim.lsp.buf.implementation()<CR>";
+        "<C-k>" = "<Cmd>lua vim.lsp.buf.signature_help()<CR>";
       }
     ];
 
