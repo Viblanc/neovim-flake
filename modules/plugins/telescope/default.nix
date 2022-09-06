@@ -10,10 +10,9 @@ in {
       telescope-file-browser-nvim
     ];
 
-    vim.keymaps = [
+    vim.nmap = [
       {
         prefix = "<Leader>";
-        mode = "n";
         "<Space>" = "<cmd>Telescope fd<CR>";
         options = [ "silent" ];
       }

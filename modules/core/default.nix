@@ -31,12 +31,16 @@ let
           (lhs: rhs: "vim.keymap.set(${toJSON mode}, ${toJSON (prefix + lhs)}, ${toJSON rhs}, ${opts})") mappings);
     in concatStringsSep "\n" (map fun keymaps);
 
-  mkMappingOption = it:
+  keymaps2LuaWithMode = keymaps: mode:
+    keymaps2Lua {
+      inherit mode;
+    } // keymaps;
+
+  mkKeymapOption = it:
     mkOption ({
-        default = {};
-        type = with types; attrsOf (nullOr str);
-      }
-      // it);
+      default = [];
+      type = with types; listOf attrs;
+    } // it);
 in {
   imports = [
     ./options.nix
@@ -94,14 +98,20 @@ in {
       type = types.attrs;
     };
 
-    keymaps = mkOption {
-      default = [];
+    keymaps = mkKeymapOption {
       description = "List of keymaps";
-      type = with types; listOf attrs;
     };
 
-    omap = mkMappingOption {
-      description = "Defines 'Operator pending mode' mappings";
+    nmap = mkKeymapOption {
+      description = "List of keymaps in normal mode";
+    };
+
+    xmap = mkKeymapOption {
+      description = "List of keymaps in visual mode";
+    };
+
+    imap = mkKeymapOption {
+      description = "List of keymaps in insert mode";
     };
   };
 
@@ -110,17 +120,6 @@ in {
     globalsScript =
       mapAttrsFlatten (name: value: "let g:${name}=${toJSON value}")
       (filterNonNull cfg.globals);
-
-    matchCtrl = it: match "Ctrl-(.)(.*)" it;
-    mapKeyBinding = it: let
-      groups = matchCtrl it;
-    in
-      if groups == null
-      then it
-      else "<C-${toUpper (head groups)}>${head (tail groups)}";
-    mapVimBinding = prefix: mappings:
-      mapAttrsFlatten (name: value: "${prefix} ${mapKeyBinding name} ${value}")
-      (filterNonNull mappings);
   in {
     vim.configRC = ''
       ${concatStringsSep "\n" globalsScript}
@@ -128,7 +127,10 @@ in {
       ${wrapLuaConfig
         (concatStringsSep "\n" [cfg.startLuaConfigRC 
                                 cfg.luaConfigRC 
-                                (keymaps2Lua cfg.keymaps)])}
+                                (keymaps2Lua cfg.keymaps)
+                                (keymaps2LuaWithMode cfg.nmap "n")
+                                (keymaps2LuaWithMode cfg.xmap "x")
+                                (keymaps2LuaWithMode cfg.imap "i")])}
     '';
   };
 }
