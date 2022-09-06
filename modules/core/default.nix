@@ -28,7 +28,7 @@ let
       in
         concatStrings 
         (mapAttrsToList 
-          (lhs: rhs: "vim.keymap.set(${mode}, ${prefix + lhs}, ${rhs}, ${opts})") mappings);
+          (lhs: rhs: "vim.keymap.set(${toJSON mode}, ${toJSON (prefix + lhs)}, ${toJSON rhs}, ${opts})") mappings);
     in concatStringsSep "\n" (map fun keymaps);
 
   mkMappingOption = it:
