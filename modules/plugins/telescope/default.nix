@@ -13,8 +13,10 @@ in {
     vim.nmap = [
       {
         prefix = "<Leader>";
-        "<Space>" = "<cmd>Telescope fd<CR>";
-        options = [ "silent" ];
+        "<Space>" = "<Cmd>Telescope fd<CR>";
+        "<Enter>" = "<Cmd>Telescope buffers<CR>";
+        "fb" = "<Cmd>Telescope file_browser<CR>";
+        "rg" = "<Cmd>Telescope live_grep<CR>";
       }
     ];
 

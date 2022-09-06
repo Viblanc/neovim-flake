@@ -32,9 +32,7 @@ let
     in concatStringsSep "\n" (map fun keymaps);
 
   keymaps2LuaWithMode = keymaps: mode:
-    keymaps2Lua {
-      inherit mode;
-    } // keymaps;
+    keymaps2Lua (map (keymap: { inherit mode; } // keymap) keymaps);
 
   mkKeymapOption = it:
     mkOption ({
@@ -45,8 +43,6 @@ in {
   imports = [
     ./options.nix
     ./highlights.nix
-    ../ui/statusline.nix
-    ../plugins
   ];
 
   options.vim = {

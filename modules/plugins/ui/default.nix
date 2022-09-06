@@ -14,6 +14,6 @@
       require("fidget").setup()
 
       require("lsp_lines").setup()
-      '';
+    '';
   };
 }

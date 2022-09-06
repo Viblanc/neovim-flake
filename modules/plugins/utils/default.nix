@@ -13,6 +13,12 @@ in {
   config = {
     vim.startPlugins = neovimPlugins ++ vimExtraPlugins;
 
+    vim.nmap = [
+      {
+        "<C-n>" = "<Cmd>NvimTreeToggle<CR>";
+      }
+    ];
+
     vim.luaConfigRC = ''
       require("trouble").setup({
         auto_open = false,

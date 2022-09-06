@@ -13,6 +13,13 @@ in {
   config = {
     vim.startPlugins = neovimPlugins ++ vimExtraPlugins;
 
+    vim.keymaps = [
+      {
+        mode = "nx";
+        "ga" = "<Plug>(EasyAlign)";
+      }
+    ];
+
     vim.luaConfigRC = ''
       require("Comment").setup({
         padding = true,
