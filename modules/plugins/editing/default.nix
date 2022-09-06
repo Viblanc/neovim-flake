@@ -15,7 +15,11 @@ in {
 
     vim.keymaps = [
       {
-        mode = "nx";
+        mode = "n";
+        "ga" = "<Plug>(EasyAlign)";
+      }
+      {
+        mode = "x";
         "ga" = "<Plug>(EasyAlign)";
       }
     ];
