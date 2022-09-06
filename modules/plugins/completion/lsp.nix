@@ -28,19 +28,19 @@ in {
     vim.nmap = [
       {
         prefix = "<Leader>";
-        "e" = "vim.diagnostic.open_float";
-        "rn" = "vim.lsp.buf.rename";
-        "ca" = "vim.lsp.buf.code_action";
-        "f" = "vim.lsp.buf.formatting";
-        "k" = "vim.lsp.buf.hover";
+        "e"    = "lua vim.diagnostic.open_float()";
+        "rn"   = "lua vim.lsp.buf.rename()";
+        "ca"   = "lua vim.lsp.buf.code_action()";
+        "f"    = "lua vim.lsp.buf.formatting()";
+        "k"    = "lua vim.lsp.buf.hover()";
       }
       {
-        "(d" = "vim.diagnostic.goto_prev";
-        ")d" = "vim.diagnostic.goto_next";
-        "gd" = "vim.lsp.buf.definition";
-        "gD" = "vim.lsp.buf.declaration";
-        "gi" = "vim.lsp.buf.implementation";
-        "<C-k>" = "vim.lsp.buf.signature_help";
+        "(d"    = "lua vim.diagnostic.goto_prev()";
+        ")d"    = "lua vim.diagnostic.goto_next()";
+        "gd"    = "lua vim.lsp.buf.definition()";
+        "gD"    = "lua vim.lsp.buf.declaration()";
+        "gi"    = "lua vim.lsp.buf.implementation()";
+        "<C-k>" = "lua vim.lsp.buf.signature_help()";
       }
     ];
 

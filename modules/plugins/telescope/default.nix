@@ -12,11 +12,11 @@ in {
 
     vim.nmap = [
       {
-        prefix = "<Leader>";
+        prefix    = "<Leader>";
         "<Space>" = "<Cmd>Telescope fd<CR>";
         "<Enter>" = "<Cmd>Telescope buffers<CR>";
-        "fb" = "<Cmd>Telescope file_browser<CR>";
-        "rg" = "<Cmd>Telescope live_grep<CR>";
+        "fb"      = "<Cmd>Telescope file_browser<CR>";
+        "rg"      = "<Cmd>Telescope live_grep<CR>";
       }
     ];
 
