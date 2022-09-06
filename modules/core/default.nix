@@ -20,9 +20,9 @@ let
       let
         inherit (map) prefix mode options;
         opts = "{" + concatStringsSep "," (map (o: "${o} = true") options) + "}";
-        keymaps = removeAttrs map [ "prefix" "options" ];
+        mappings = removeAttrs map [ "prefix" "options" ];
       in
-        mapAttrsToList (lhs: rhs: "vim.keymap.set(${mode}, ${prefix + lhs}, ${rhs}, ${opts})") keymaps;
+        mapAttrsToList (lhs: rhs: "vim.keymap.set(${mode}, ${prefix + lhs}, ${rhs}, ${opts})") mappings;
     in concatStringsSep "\n" (map fun keymaps);
 
   mkMappingOption = it:
