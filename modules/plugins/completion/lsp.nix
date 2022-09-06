@@ -32,6 +32,7 @@ in {
         "rn" = "vim.lsp.buf.rename";
         "ca" = "vim.lsp.buf.code_action";
         "f" = "vim.lsp.buf.formatting";
+        "k" = "vim.lsp.buf.hover";
       }
       {
         "(d" = "vim.diagnostic.goto_prev";
@@ -39,7 +40,6 @@ in {
         "gd" = "vim.lsp.buf.definition";
         "gD" = "vim.lsp.buf.declaration";
         "gi" = "vim.lsp.buf.implementation";
-        "K" = "vim.lsp.buf.hover";
         "<C-k>" = "vim.lsp.buf.signature_help";
       }
     ];
