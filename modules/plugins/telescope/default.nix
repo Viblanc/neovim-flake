@@ -10,6 +10,14 @@ in {
       telescope-file-browser-nvim
     ];
 
+    vim.keymaps = [
+      {
+        prefix = "<Leader>";
+        mode = "n";
+        "<Space>" = "<cmd>Telescope fd<CR>";
+      }
+    ];
+
     vim.luaConfigRC = ''
       local telescope = require("telescope")
 
