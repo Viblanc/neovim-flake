@@ -97,7 +97,7 @@ in {
     keymaps = mkOption {
       default = [];
       description = "List of keymaps";
-      type = with types; listOf (attrsOf (nullOr str));
+      type = with types; listOf attrs;
     };
 
     omap = mkMappingOption {
