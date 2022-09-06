@@ -22,7 +22,7 @@ let
         opts = "{" + concatStringsSep "," (map (o: "${o} = true") options) + "}";
         keymaps = removeAttrs map [ "prefix" "options" ];
       in
-        mapAttrsToList (lhs: rhs: "vim.keymap.set(${mode}, ${lhs}, ${rhs}, ${opts})") keymaps;
+        mapAttrsToList (lhs: rhs: "vim.keymap.set(${mode}, ${prefix + lhs}, ${rhs}, ${opts})") keymaps;
     in concatStringsSep "\n" (map fun keymaps);
 
   mkMappingOption = it:
