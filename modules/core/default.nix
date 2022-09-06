@@ -18,11 +18,16 @@ let
   keymaps2Lua = keymaps:
     let fun = map:
       let
-        inherit (map) prefix mode options;
-        opts = "{" + concatStringsSep "," (map (o: "${o} = true") options) + "}";
-        mappings = removeAttrs map [ "prefix" "options" ];
+        inherit (map) prefix mode;
+        opts = if (hasAttr "options" map) then
+          "{" + concatStringsSep "," (map (o: "${o} = true") map.options) + "}"
+        else
+          "{}";
+        mappings = removeAttrs map [ "prefix" "mode" "options" ];
       in
-        mapAttrsToList (lhs: rhs: "vim.keymap.set(${mode}, ${prefix + lhs}, ${rhs}, ${opts})") mappings;
+        concatStrings 
+        (mapAttrsToList 
+          (lhs: rhs: "vim.keymap.set(${mode}, ${prefix + lhs}, ${rhs}, ${opts})") mappings);
     in concatStringsSep "\n" (map fun keymaps);
 
   mkMappingOption = it:
