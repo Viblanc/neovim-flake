@@ -18,7 +18,8 @@ let
   keymaps2Lua = keymaps:
     let fun = map:
       let
-        inherit (map) prefix mode;
+        inherit (map) mode;
+        prefix = if (hasAttr "prefix" map) then map.prefix else "";
         opts = if (hasAttr "options" map) then
           "{" + concatStringsSep "," (map (o: "${o} = true") map.options) + "}"
         else
