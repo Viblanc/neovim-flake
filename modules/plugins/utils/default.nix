@@ -15,7 +15,7 @@ in {
 
     vim.nmap = [
       {
-        "<C-n>" = "<Cmd>NvimTreeToggle<CR>";
+        "<C-n>" = "NvimTreeToggle";
       }
     ];
 

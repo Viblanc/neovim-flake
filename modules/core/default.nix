@@ -16,7 +16,16 @@ let
   '';
 
   keymaps2Lua = keymaps:
-    let fun = keymap:
+    let
+      parseRhs = rhs:
+        let res =
+          if (substring 0 1 rhs != "<") then
+            "<Cmd>" + rhs + "<CR>"
+          else
+            rhs;
+        in toJSON res;
+
+      fun = keymap:
       let
         inherit (keymap) mode;
         prefix = if (hasAttr "prefix" keymap) then keymap.prefix else "";
@@ -28,7 +37,7 @@ let
       in
         concatStrings 
         (mapAttrsToList 
-          (lhs: rhs: "vim.keymap.set(${toJSON mode}, ${toJSON (prefix + lhs)}, ${toJSON rhs}, ${opts})") mappings);
+          (lhs: rhs: "vim.keymap.set(${toJSON mode}, ${toJSON (prefix + lhs)}, ${parseRhs rhs}, ${opts})") mappings);
     in concatStringsSep "\n" (map fun keymaps);
 
   keymaps2LuaWithMode = keymaps: mode:
