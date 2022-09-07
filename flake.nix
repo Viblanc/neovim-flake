@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+    utils.url = "github:numtide/flake-utils";
 
     vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins";
 
@@ -45,95 +46,92 @@
     nvim-web-devicons = { url = "github:kyazdani42/nvim-web-devicons"; flake = false; };
   };
 
-  outputs = { self, nixpkgs, vim-extra-plugins, neovim, rnix-lsp, ... }@inputs:
-  let
-    system = "x86_64-linux";
-
-    plugins = [
-      "nvim-lspconfig"
-      "nvim-cmp"
-      "cmp-nvim-lsp"
-      "cmp-nvim-lua"
-      "cmp-path"
-      "cmp-buffer"
-      "cmp-cmdline"
-      "cmp-under-comparator"
-      "cmp_luasnip"
-      "luasnip"
-      "nvim-treesitter"
-      "nvim-treesitter-context"
-      "telescope-nvim"
-      "plenary-nvim"
-      "telescope-fzf-native-nvim"
-      "telescope-file-browser-nvim"
-      "comment-nvim"
-      "vim-easy-align"
-      "vim-surround"
-      "vim-repeat"
-      "leap-nvim"
-      "trouble-nvim"
-      "nvim-tree-lua"
-      "nvim-colorizer-lua"
-      "vim-startuptime"
-      "matchparen-nvim"
-      "nvim-notify"
-      "fidget-nvim"
-      "lsp_lines-nvim"
-      "nvim-web-devicons"
-    ];
-
-    vimExtraPluginsOverlay = vim-extra-plugins.overlays.default;
-
-    neovimOverlay = final: prev: {
-      neovim-nightly = neovim.packages.${prev.system}.neovim;
-      rnix-lsp = rnix-lsp.packages.${prev.system}.rnix-lsp;
-    };
-
-    pluginsOverlay = lib.buildPluginOverlay;
-
-    pkgs = lib.mkPkgs { 
-      inherit nixpkgs;
-      overlays = [
-        vimExtraPluginsOverlay
-        neovimOverlay
-        pluginsOverlay
+  outputs = { self, nixpkgs, utils, vim-extra-plugins, neovim, rnix-lsp, ... }@inputs:
+  utils.lib.eachDefaultSystem
+  (system:
+    let
+      plugins = [
+        "nvim-lspconfig"
+        "nvim-cmp"
+        "cmp-nvim-lsp"
+        "cmp-nvim-lua"
+        "cmp-path"
+        "cmp-buffer"
+        "cmp-cmdline"
+        "cmp-under-comparator"
+        "cmp_luasnip"
+        "luasnip"
+        "nvim-treesitter"
+        "nvim-treesitter-context"
+        "telescope-nvim"
+        "plenary-nvim"
+        "telescope-fzf-native-nvim"
+        "telescope-file-browser-nvim"
+        "comment-nvim"
+        "vim-easy-align"
+        "vim-surround"
+        "vim-repeat"
+        "leap-nvim"
+        "trouble-nvim"
+        "nvim-tree-lua"
+        "nvim-colorizer-lua"
+        "vim-startuptime"
+        "matchparen-nvim"
+        "nvim-notify"
+        "fidget-nvim"
+        "lsp_lines-nvim"
+        "nvim-web-devicons"
       ];
-    };
 
-    lib = import ./lib { inherit pkgs inputs plugins; };
+      vimExtraPluginsOverlay = vim-extra-plugins.overlays.default;
 
-    mkNeovimPkg = pkgs: 
-      lib.neovimBuilder {
-        inherit pkgs;
-        config = {
-          vim.viAlias = true;
-          vim.treesitter.enable = true;
-          vim.lsp.enable = true;
-          vim.lsp.clang = true;
-          vim.lsp.elixir = true;
-          vim.lsp.go = true;
-          vim.lsp.java = true;
-          vim.lsp.lua = true;
-          vim.lsp.nix = true;
-          vim.lsp.ocaml = true;
-          vim.lsp.python = true;
-          vim.lsp.rust = true;
-          vim.lsp.typescript = true;
-        };
+      neovimOverlay = final: prev: {
+        neovim-nightly = neovim.packages.${prev.system}.neovim;
+        rnix-lsp = rnix-lsp.packages.${prev.system}.rnix-lsp;
       };
 
-  in {
-    devShells = lib.withDefaultSystems
-      (sys: {
-        default = pkgs.mkShell {
-          buildInputs = [self.packages.${sys}.neovim-svzer];
-        };
-      });
+      pluginsOverlay = lib.buildPluginOverlay;
 
-    packages = lib.withDefaultSystems 
-      (sys: rec {
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [
+          vimExtraPluginsOverlay
+          neovimOverlay
+          pluginsOverlay
+        ];
+      };
+
+      lib = import ./lib { inherit pkgs inputs plugins; };
+
+      mkNeovimPkg = pkgs: 
+        lib.neovimBuilder {
+          inherit pkgs;
+          config = {
+            vim.viAlias = true;
+            vim.treesitter.enable = true;
+            vim.lsp.enable = true;
+            vim.lsp.clang = true;
+            vim.lsp.elixir = true;
+            vim.lsp.go = true;
+            vim.lsp.java = true;
+            vim.lsp.lua = true;
+            vim.lsp.nix = true;
+            vim.lsp.ocaml = true;
+            vim.lsp.python = true;
+            vim.lsp.rust = true;
+            vim.lsp.typescript = true;
+          };
+        };
+
+    in rec {
+      packages = rec {
+        neovim-svzer = mkNeovimPkg pkgs;
         default = neovim-svzer;
-        neovim-svzer = mkNeovimPkg pkgs.${sys};
-      });
-  };
+      };
+      apps = rec {
+        neovim-svzer = utils.lib.mkApp { drv = packages.neovim-svzer; name = "nvim"; };
+        default = neovim-svzer;
+      };
+    }
+  );
 }
