@@ -76,7 +76,7 @@ in {
         },
         mapping = {
           ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }), {"i", "s"}),
-          ["<C-k>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }), {"i", "s"}),
+          ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }), {"i", "s"}),
           ["<C-n>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })
