@@ -190,6 +190,22 @@
         "type": "github"
       }
     },
+    "fugitive": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662284293,
+        "narHash": "sha256-IzsvDf7y91iV3XdrXW2U5WTdSmuALlpVO113h7Ovuac=",
+        "owner": "tpope",
+        "repo": "vim-fugitive",
+        "rev": "dd8107cabf5fe85df94d5eedcae52415e543f208",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tpope",
+        "repo": "vim-fugitive",
+        "type": "github"
+      }
+    },
     "leap-nvim": {
       "flake": false,
       "locked": {
@@ -536,6 +552,7 @@
         "cmp_luasnip": "cmp_luasnip",
         "comment-nvim": "comment-nvim",
         "fidget-nvim": "fidget-nvim",
+        "fugitive": "fugitive",
         "leap-nvim": "leap-nvim",
         "lsp_lines-nvim": "lsp_lines-nvim",
         "luasnip": "luasnip",
@@ -560,7 +577,6 @@
         "utils": "utils_2",
         "vim-easy-align": "vim-easy-align",
         "vim-extra-plugins": "vim-extra-plugins",
-        "vim-fugitive": "vim-fugitive",
         "vim-repeat": "vim-repeat",
         "vim-startuptime": "vim-startuptime",
         "vim-surround": "vim-surround"
@@ -693,22 +709,6 @@
       "original": {
         "owner": "m15a",
         "repo": "nixpkgs-vim-extra-plugins",
-        "type": "github"
-      }
-    },
-    "vim-fugitive": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1662284293,
-        "narHash": "sha256-IzsvDf7y91iV3XdrXW2U5WTdSmuALlpVO113h7Ovuac=",
-        "owner": "tpope",
-        "repo": "vim-fugitive",
-        "rev": "dd8107cabf5fe85df94d5eedcae52415e543f208",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tpope",
-        "repo": "vim-fugitive",
         "type": "github"
       }
     },
