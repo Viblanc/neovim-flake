@@ -36,9 +36,11 @@
     vim-repeat = { url = "github:tpope/vim-repeat"; flake = false; };
     leap-nvim = { url = "github:ggandor/leap.nvim"; flake = false; };
     trouble-nvim = { url = "github:folke/trouble.nvim"; flake = false; };
+    neogit = { url = "github:TimUntersberger/neogit"; flake = false; };
     nvim-tree-lua = { url = "github:kyazdani42/nvim-tree.lua"; flake = false; };
     nvim-colorizer-lua = { url = "github:norcalli/nvim-colorizer.lua"; flake = false; };
     vim-startuptime = { url = "github:dstein64/vim-startuptime"; flake = false; };
+    vim-fugitive = { url = "github:tpope/vim-fugitive"; flake = false; };
     matchparen-nvim = { url = "github:monkoose/matchparen.nvim"; flake = false; };
     nvim-notify = { url = "github:rcarriga/nvim-notify"; flake = false; };
     fidget-nvim = { url = "github:j-hui/fidget.nvim"; flake = false; };
@@ -73,9 +75,11 @@
         "vim-repeat"
         "leap-nvim"
         "trouble-nvim"
+        "neogit"
         "nvim-tree-lua"
         "nvim-colorizer-lua"
         "vim-startuptime"
+        "vim-fugitive"
         "matchparen-nvim"
         "nvim-notify"
         "fidget-nvim"

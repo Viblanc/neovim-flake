@@ -5,6 +5,7 @@ let
     nvim-tree-lua
     nvim-colorizer-lua
     vim-startuptime
+    vim-fugitive
   ];
   vimExtraPlugins = with pkgs.vimExtraPlugins; [
     matchparen-nvim
