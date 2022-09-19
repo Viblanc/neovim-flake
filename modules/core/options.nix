@@ -55,7 +55,7 @@ in {
     };
 
     cmdHeight = mkOption {
-      default = 0;
+      default = 1;
       description = "Set height of the command pane";
       type = types.int;
     };
