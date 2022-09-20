@@ -20,6 +20,7 @@ in {
       cmp-path
       cmp-buffer
       cmp-cmdline
+      cmp-nvim-tags
       cmp-under-comparator
       cmp_luasnip
       luasnip
@@ -105,6 +106,7 @@ in {
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" },
+          { name = "tags" },
           { name = "path" },
           { name = "buffer", keyword_length = 5 }
         }),

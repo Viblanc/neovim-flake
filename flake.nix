@@ -21,6 +21,7 @@
     cmp-path = { url = "github:hrsh7th/cmp-path"; flake = false; };
     cmp-buffer = { url = "github:hrsh7th/cmp-buffer"; flake = false; };
     cmp-cmdline = { url = "github:hrsh7th/cmp-cmdline"; flake = false; };
+    cmp-nvim-tags = { url = "github:quangnguyen30192/cmp-nvim-tags"; flake = false; };
     cmp-under-comparator = { url = "github:lukas-reineke/cmp-under-comparator"; flake = false; };
     cmp_luasnip = { url = "github:saadparwaiz1/cmp_luasnip"; flake = false; };
     luasnip = { url = "github:l3mon4d3/luasnip"; flake = false; };
@@ -59,6 +60,7 @@
         "cmp-path"
         "cmp-buffer"
         "cmp-cmdline"
+        "cmp-nvim-tags"
         "cmp-under-comparator"
         "cmp_luasnip"
         "luasnip"
