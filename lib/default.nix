@@ -33,18 +33,6 @@ with builtins;
   let
     inherit (prev.vimUtils) buildVimPluginFrom2Nix;
 
-    languageServers = prev.withPlugins (p: [
-      p.clang-tools
-      p.elixir_ls
-      p.gopls
-      p.jdt-language-server
-      p.sumneko-lua-language-server
-      p.ocamlPackages.ocaml-lsp
-      p.nodePackages.pyright
-      p.rust-analyzer
-      p.nodePackages.typescript-language-server
-    ]);
-
     treesitterGrammars = prev.tree-sitter.withPlugins (p: [
       p.tree-sitter-c
       p.tree-sitter-css
