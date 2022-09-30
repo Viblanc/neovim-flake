@@ -7,12 +7,9 @@ let
     vim-startuptime
     fugitive
   ];
-  vimExtraPlugins = with pkgs.vimExtraPlugins; [
-    matchparen-nvim
-  ];
 in {
   config = {
-    vim.startPlugins = neovimPlugins ++ vimExtraPlugins;
+    vim.startPlugins = neovimPlugins;
 
     vim.nmap = [
       {
@@ -32,11 +29,6 @@ in {
         "*";
       }, {
         mode = "foreground"
-      })
-
-      require("matchparen").setup({
-        on_startup = true,
-        hl_group = "MatchParen"
       })
     '';
   };

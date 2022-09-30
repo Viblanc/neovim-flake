@@ -5,8 +5,6 @@
     nixpkgs.url = "nixpkgs/nixpkgs-unstable";
     utils.url = "github:numtide/flake-utils";
 
-    vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins";
-
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,20 +33,18 @@
     vim-easy-align = { url = "github:junegunn/vim-easy-align"; flake = false; };
     vim-surround = { url = "github:tpope/vim-surround"; flake = false; };
     vim-repeat = { url = "github:tpope/vim-repeat"; flake = false; };
-    leap-nvim = { url = "github:ggandor/leap.nvim"; flake = false; };
     trouble-nvim = { url = "github:folke/trouble.nvim"; flake = false; };
     nvim-tree-lua = { url = "github:kyazdani42/nvim-tree.lua"; flake = false; };
     nvim-colorizer-lua = { url = "github:norcalli/nvim-colorizer.lua"; flake = false; };
     vim-startuptime = { url = "github:dstein64/vim-startuptime"; flake = false; };
     fugitive = { url = "github:tpope/vim-fugitive"; flake = false; };
-    matchparen-nvim = { url = "github:monkoose/matchparen.nvim"; flake = false; };
     nvim-notify = { url = "github:rcarriga/nvim-notify"; flake = false; };
     fidget-nvim = { url = "github:j-hui/fidget.nvim"; flake = false; };
     lsp_lines-nvim = { url = "sourcehut:~whynothugo/lsp_lines.nvim"; flake = false; };
     nvim-web-devicons = { url = "github:kyazdani42/nvim-web-devicons"; flake = false; };
   };
 
-  outputs = { self, nixpkgs, utils, vim-extra-plugins, neovim, rnix-lsp, ... }@inputs:
+  outputs = { self, nixpkgs, utils, neovim, rnix-lsp, ... }@inputs:
   utils.lib.eachDefaultSystem
   (system:
     let
@@ -74,20 +70,16 @@
         "vim-easy-align"
         "vim-surround"
         "vim-repeat"
-        "leap-nvim"
         "trouble-nvim"
         "nvim-tree-lua"
         "nvim-colorizer-lua"
         "vim-startuptime"
         "fugitive"
-        "matchparen-nvim"
         "nvim-notify"
         "fidget-nvim"
         "lsp_lines-nvim"
         "nvim-web-devicons"
       ];
-
-      vimExtraPluginsOverlay = vim-extra-plugins.overlays.default;
 
       neovimOverlay = final: prev: {
         neovim-nightly = neovim.packages.${prev.system}.neovim;
@@ -99,7 +91,6 @@
       pkgs = import nixpkgs {
         inherit system;
         overlays = [
-          vimExtraPluginsOverlay
           neovimOverlay
           pluginsOverlay
         ];

@@ -6,12 +6,9 @@ let
     vim-surround
     vim-repeat
   ];
-  vimExtraPlugins = with pkgs.vimExtraPlugins; [
-    leap-nvim
-  ];
 in {
   config = {
-    vim.startPlugins = neovimPlugins ++ vimExtraPlugins;
+    vim.startPlugins = neovimPlugins;
 
     vim.keymaps = [
       {
@@ -43,8 +40,6 @@ in {
           eol = "gcA"
         }
       })
-
-      require("leap").set_default_keymaps()
     '';
   };
 }
