@@ -82,7 +82,7 @@
       ];
 
       neovimOverlay = final: prev: {
-        neovim-nightly = neovim.packages.${prev.system}.neovim;
+        # neovim-nightly = neovim.packages.${prev.system}.neovim;
         rnix-lsp = rnix-lsp.packages.${prev.system}.rnix-lsp;
       };
 

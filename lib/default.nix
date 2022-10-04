@@ -18,7 +18,8 @@ with builtins;
 
     vim = vimOptions.config.vim;
 
-  in pkgs.wrapNeovim pkgs.neovim-nightly {
+  # in pkgs.wrapNeovim pkgs.neovim-nightly {
+  in pkgs.neovim.override {
     viAlias = vim.viAlias;
     configure = {
       customRC = vim.configRC;
